@@ -264,6 +264,17 @@ Status: Stable
    [paste_deploy]
    flavor = keystone
 
+* Update the /etc/glance/glance-registry-paste.ini:
+
+   [filter:authtoken]
+   paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
+   auth_host = 10.10.100.51
+   auth_port = 35357
+   auth_protocol = http
+   admin_tenant_name = service
+   admin_user = glance
+   admin_password = service_pass
+
 * Restart the glance-api and glance-registry services::
 
    service glance-api restart; service glance-registry restart
